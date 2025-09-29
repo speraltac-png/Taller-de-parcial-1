@@ -280,9 +280,26 @@ class Motor:
             self.__velocidad = valor
         else:
             print("velocidad no valida")
-
-        
 ```
+## 16. Elección de convención
+Explica con tus palabras cuándo usarías _atributo frente a __atributo en una API
+pública de una librería.
+
+**Respuesta:** 
+
+Supongo que _atributo la usaría en casos donde no son datos delicados, es decir, datos que no deben ser cambiados desde el usuario, pero que al mismo tiempo no signifique un riesgo dejarlos accesibles, para asi facilitar el codigo. En cambio __atributo solo lo usaria si de verdad necesito una encapsulacion completa
+
+## 17. Detección de fuga de encapsulación
+
+¿Qué problema hay aquí?
+```
+class Buffer:
+    def __init__(self, data):
+        self._data = list(data)
+    def get_data(self):
+        return self._data
+```
+Propón una corrección.
 
 
 
