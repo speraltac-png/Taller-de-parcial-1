@@ -254,6 +254,35 @@ class Registro:
         return tuplaInmutable
 ```
 # Taller Python - Respuestas Parte C. Diseño y refactor
+## 15. Refactor de encapsulación
+Refactoriza para evitar acceso directo al atributo y validar que velocidad sea entre 0 y
+200.
+```
+class Motor:
+    def __init__(self, velocidad):
+        self.velocidad = velocidad # refactor aquí
+```
+Escribe la versión con @property.
+
+**Respuesta:** 
+```
+class Motor:
+    def __init__(self, velocidad):
+        self.velocidad = velocidad 
+
+    @property
+    def velocidad(self):
+        return self.__velocidad
+
+    @velocidad.setter
+    def velocidad(self, valor):
+        if (0 <= valor <= 200):
+            self.__velocidad = valor
+        else:
+            print("velocidad no valida")
+
+        
+```
 
 
 
