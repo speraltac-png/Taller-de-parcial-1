@@ -299,8 +299,33 @@ class Buffer:
     def get_data(self):
         return self._data
 ```
+**Respuesta:**
+
+El getter devuelve _data directamente, por lo que se vuelve posible editarlo desde afuera
+
 Propón una corrección.
 
+```
+class Buffer:
+    def __init__(self, data):
+        self._data = list(data)
+    def get_data(self):
+        return tuple(self._data)
+```
+
+## 18. Diseño con herencia y mangling
+¿Dónde fallará esto y cómo lo arreglas?
+
+```
+class A:
+    def __init__(self):
+        self.__x = 1
+    
+class B(A):
+    def get(self):
+        return self.__x
+```
+**Respuesta:**
 
 
 
