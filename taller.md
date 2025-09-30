@@ -326,6 +326,73 @@ class B(A):
         return self.__x
 ```
 **Respuesta:**
+Falla en el return, ya que __x cambia de nombre, por lo tanto, daria attribute error
+```
+class A:
+    def __init__(self):
+        self.__x = 1
+class B(A):
+    def get(self):
+        return self._A__x
+```
 
+## 19. Composición y fachada
+Completa para exponer solo un método seguro de un objeto interno.
+```
+class _Repositorio:
+    def __init__(self):
+        self._datos = {}
+    def guardar(self, k, v):
+        self._datos[k] = v
+    def _dump(self):
+        return dict(self._datos)
 
+class Servicio:
+    def __init__(self):
+        self.__repo = _Repositorio()
+    # Expón un método 'guardar' que delegue en el repositorio,
+    # pero NO expongas _dump ni __repo.
+```
+**Respuesta:**
+```
+class _Repositorio:
+    def __init__(self):
+        self._datos = {}
+    def guardar(self, k, v):
+        self._datos[k] = v
+    def _dump(self):
+        return dict(self._datos)
 
+class Servicio:
+    def __init__(self):
+        self.__repo = _Repositorio()
+    def guardar(self, k, v):
+        self.__repo.guardar(k, v)    
+```
+
+## 20. Mini-kata
+Escribe una clase ContadorSeguro con:
+
+- atributo “protegido” _n
+- método inc() que suma 1
+- propiedad n de solo lectura
+- método “privado” __log() que imprima "tick" cuando se incrementa
+  
+Muestra un uso básico con dos incrementos y la lectura final.
+
+**Respuesta:**
+```
+class ContadorSeguro:
+    def __init__(self:
+        self._n = 0
+
+    def inc(self):
+        self._n += 1
+        self.__log()
+
+    @property
+    def n(self):
+        return self._n
+    def __log(self):
+        print("tick")
+```
